@@ -2,6 +2,7 @@
 Pacientes=[]
 Medicos=[]
 consultas=[]
+
 #Sistema de cadastro do paciente
 def SubmenuPaciente():
     while True:
@@ -31,7 +32,7 @@ def SubmenuPaciente():
             
 def Cadastrar_Paciente():
     while True:
-        cpf=int(input("Digite o CPF do paciente: ")) 
+        cpf=(input("Digite o CPF do paciente: ")) 
         
         cpfExiste = False
         for paciente in Pacientes:
@@ -59,10 +60,10 @@ def Listar_Pacientes():
     print("Lista de pacientes: ")
     for indice,paciente in enumerate(Pacientes):
          print("\n") 
-         print(f"Nome: {paciente[1]}") 
-         print(f"CPF: {paciente[2]}")
-         print(f"Endereço: {paciente[3]}")
-         print(f"Telefone: {paciente[4]}")
+         print(f"{indice}. Nome: {paciente[1]}") 
+         print(f"CPF: {paciente[0]}")
+         print(f"Endereço: {paciente[2]}")
+         print(f"Telefone: {paciente[3]}")
          print("---------------------------------")
             
 def Alterar_Paciente():
@@ -73,17 +74,17 @@ def Alterar_Paciente():
             if paciente[2]==cpf:
                 print(f"Paciente encontrado: {paciente[2]}")
                 print(f"Nome: {paciente[1]}")
-                print(f"CPF:{paciente[2]}")
-                print(f"Endereço: {paciente[3]}")
-                print(f"Telefone: {paciente[4]}") 
+                print(f"CPF:{paciente[0]}")
+                print(f"Endereço: {paciente[2]}")
+                print(f"Telefone: {paciente[3]}") 
                 nome=input("Digite o novo nome do paciente: ")
                 cpf=int(input("Digite o novo CPF do paciente: "))
                 Endereço=input("Digite o novo endereço do paciente(rua,casa e bairro): ") 
                 Telefone=int(input("Digite o novo telefone do paciente: "))
                 paciente[1]=nome
-                paciente[2]=cpf
-                paciente[3]=Endereço
-                paciente[4]=Telefone
+                paciente[0]=cpf
+                paciente[2]=Endereço
+                paciente[3]=Telefone
                 print("Paciente alterado com sucesso!")
                 encontrado=True
                 break  
@@ -102,7 +103,7 @@ def Excluir_Paciente():
         cpf=int(input("Digite o CPF do paciente que deseja excluir: "))
         encontrado=False
         for paciente in Pacientes:
-            if paciente[2]==cpf:
+            if paciente[0]==cpf:
                 Pacientes.remove(paciente) 
                 print("Paciente excluído com sucesso!")
                 encontrado=True
