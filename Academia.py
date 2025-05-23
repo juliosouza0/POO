@@ -19,6 +19,7 @@ lista_contato_recepcionista = []
 
 nomes_alunos = []
 telefones_alunos = []
+planos_alunos = []
 
 nome_exercicio = []
 quantidade_repeticao = []
@@ -35,20 +36,29 @@ def matricular_alunos():
             continue
             
         telefone_aluno = input("Digite o telefone do aluno(a) a ser cadastrado: ")
-        
+
+        # Exibir planos disponíveis
+        print("\n--- Planos Disponíveis ---")
+        for indice in range(len(nomes_planos)):
+            print(f"{indice + 1}. {nomes_planos[indice]} - R${valores_planos[indice]:.2f}")
+
+        numero_plano = int(input("Digite o número do plano escolhido: "))
+        plano_escolhido = nomes_planos[numero_plano - 1]
+
         nomes_alunos.append(nome_aluno)
         telefones_alunos.append(telefone_aluno)
+        planos_alunos.append(plano_escolhido)
         
-        print(f"Aluno(a) {nome_aluno} cadastrado com sucesso!")
+        print(f"Aluno(a) {nome_aluno} cadastrado com sucesso no plano '{plano_escolhido}'!")
         
-        continuar = input("Deseja continuar a matricula de alunos? (1 - Sim / 2 - Nao): ")
+        continuar = input("Deseja continuar a matrícula de alunos? (1 - Sim / 2 - Não): ")
         if continuar == "2":
             break
         elif continuar == "1":
             print("Continuando...")
         else:
-            print("Opcao Invalida")
-            continue
+            print("Opção inválida")
+
         
 # Cadastro de Funcionarios
 def cadastrar_funcionario():
@@ -327,7 +337,7 @@ def menu_admin():
         print("2 - Cadastrar Funcionário")
         print("3 - Matricular Aluno")
         print("4 - Cadastrar Planos")
-        print("5 - Listar Planos")
+        print("5 - Listar alunos matriculados")
         print("0 - Sair")
         
         op = input("Escolha uma das opções: ")
@@ -341,19 +351,22 @@ def menu_admin():
         elif op == "4":
             cadastrar_planos()
         elif op == "5":
-            listar_planos()
+            listar_alunos()
         elif op == "0":
             break
         else:
             print("Opção inválida")
 
-# Função para listar os planos existentes
-def listar_planos():
-    print("\n--- Planos Disponíveis ---")
-
-    for indice, nome in enumerate(nomes_planos):
-        valor = valores_planos[indice]
-        print(f"{indice + 1}. {nome} - R$ {valor}")
+# Função para listar os alunos matriculados
+def listar_alunos():
+    print("\n--- Alunos Matriculados ---")
+    if len(nomes_alunos) == 0:
+        print("Nenhum aluno cadastrado.")
+    else:
+        for indice, nome in enumerate(nomes_alunos):
+            telefone = telefones_alunos[indice]
+            plano = planos_alunos[indice]
+            print(f"{indice + 1}. Nome: {nome} | Telefone: {telefone} | Plano: {plano}")
 
 
 # Inicialização do Sistema
